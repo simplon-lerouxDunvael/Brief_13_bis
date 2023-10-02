@@ -6,10 +6,6 @@ output "subnet_id" {
   value = azurerm_subnet.subnet1.id
 }
 
-output "client_certificate" {
-  value = azurerm_kubernetes_cluster.AKS.kube_config.0.client_certificate
-}
-
 output "priv_subnet_id" {
   value = azurerm_subnet.priv_subnet.id
 }
