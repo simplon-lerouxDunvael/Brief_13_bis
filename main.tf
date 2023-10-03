@@ -100,7 +100,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
   command = "ansible-galaxy install -r requirements.yml"
   }
   provisioner "local-exec" {
-  command = "ansible-playbook playbook.yml -r inventory.ini TO CONTINUE"
+  command = "ansible-playbook playbook.yml -i inventory.ini"
   } */
 }
 
