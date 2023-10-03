@@ -97,8 +97,11 @@ resource "azurerm_linux_virtual_machine" "VM" {
     version   = "8.8.2023081717"
   }
   /* provisioner "local-exec" {
-  command = "ansible-galaxy install -r requirements.txt"
-} */
+  command = "ansible-galaxy install -r requirements.yml"
+  }
+  provisioner "local-exec" {
+  command = "ansible-playbook playbook.yml -r inventory.ini TO CONTINUE"
+  } */
 }
 
 # Créez une interface réseau pour la machine virtuelle
