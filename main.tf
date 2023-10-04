@@ -30,10 +30,6 @@ resource "azurerm_subnet" "subnet1" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.subnet1_prefix
-  
-  network_security_group {
-    id = azurerm_network_security_group.nsg.id
-  }
 }
 
 # BONUS
@@ -152,4 +148,7 @@ resource "azurerm_network_interface" "Nic" {
     private_ip_address_allocation = var.nic_allocation
     public_ip_address_id          = azurerm_public_ip.nic_public_ip.id
   }
+
+  # Associate the NIC with the NSG
+  network_security_group_ids = [azurerm_network_security_group.nsg.id]
 }
