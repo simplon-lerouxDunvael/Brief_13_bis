@@ -73,6 +73,16 @@ resource "tls_private_key" "sshKey" {
   rsa_bits  = 4096
 }
 
+# Créer une adresse IP publqiue pour le NIC de la VM
+resource "azurerm_public_ip" "nic_public_ip" {
+  name                = var.nic_publicIP_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  allocation_method   = var.nic_pubIP_allocation # Use "Static" if a static IP is needed
+  sku                 = var.sku_nic_pubIP
+}
+
+
 # Créez la machine virtuelle Azure
 resource "azurerm_linux_virtual_machine" "VM" {
   name                = var.vm_name
@@ -114,5 +124,6 @@ resource "azurerm_network_interface" "Nic" {
     name                          = var.nicIP_conf
     subnet_id                     = azurerm_subnet.subnet1.id
     private_ip_address_allocation = var.nic_allocation
+    public_ip_address_id           = azurerm_public_ip.nic_public_ip.id
   }
 }
