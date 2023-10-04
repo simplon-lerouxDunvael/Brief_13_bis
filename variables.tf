@@ -150,6 +150,60 @@ variable nsgRule_destination_address_prefix {
   default = "*"
 }
 
+variable nsg-rule_name2 {
+  description = "Nom de la règle 2 NSG de la VM"
+  type = string
+  default = "nsgRule_allow-outbound"
+}
+
+variable nsgRule_priority2 {
+  description = "Priority of the NSG rule allow-outbound"
+  type = string
+  default = 2001
+}
+
+variable nsgRule_direction2 {
+  description = "Direction d'ouverture du port"
+  type = string
+  default = "Outound"
+}
+
+variable nsgRule_access2 {
+  description = "Autorisation pour la direction d'ouverture du port"
+  type = string
+  default = "Allow"
+}
+
+variable nsgRule_protocol2 {
+  description = "Type de protocole pour la règle allow_ssh"
+  type = string
+  default = "Tcp"
+}
+
+variable nsgRule_source_port_range2 {
+  description = "Port ou plage de ports autorisés ou refusés pour le trafic entrant ou sortant"
+  type = string
+  default = "*"
+}
+
+variable nsgRule_destination_port_range2 {
+  description = "Port de destination à ouvrir"
+  type = string
+  default = "*"
+}
+
+variable nsgRule_source_address_prefix2 {
+  description = "Plage d'adresses IP autorisées à initier le trafic"
+  type = string
+  default = "*"
+}
+
+variable nsgRule_destination_address_prefix2 {
+  description = "Plage d'adresses IP à laquelle le trafic est destiné"
+  type = string
+  default = "*"
+}
+
 variable nic_publicIP_name {
   description = "Nom de l'IP publique du NIC de la VM"
   type = string

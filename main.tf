@@ -104,6 +104,21 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
+# Créer les règles du NSG de la VM 2
+resource "azurerm_network_security_rule" "ssh_rule2" {
+  name                        = var.nsg-rule_name2
+  priority                    = var.nsgRule_priority2
+  direction                   = var.nsgRule_direction2
+  access                      = var.nsgRule_access2
+  protocol                    = var.nsgRule_protocol2
+  source_port_range           = var.nsgRule_source_port_range2
+  destination_port_range      = var.nsgRule_destination_port_range2
+  source_address_prefix       = var.nsgRule_source_address_prefix2
+  destination_address_prefix  = var.nsgRule_destination_address_prefix2
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
 # Associate security group with network interface
 resource "azurerm_network_interface_security_group_association" "nsgAssociation" {
   network_interface_id      = azurerm_network_interface.Nic.id
@@ -136,9 +151,9 @@ resource "azurerm_linux_virtual_machine" "VM" {
   /* provisioner "local-exec" {
   command = "ansible-galaxy install -r requirements.yml"
   } */
-  /* provisioner "local-exec" {
+  provisioner "local-exec" {
   command = "ansible-playbook playbook.yml -i inventory.ini"
-  } */
+  }
 }
 
 # Créez une interface réseau pour la machine virtuelle
