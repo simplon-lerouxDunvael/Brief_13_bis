@@ -49,7 +49,7 @@ variable gateway_name {
 variable pubIP_gateway_name {  
   description = "Nom de l'IP publique de la gateway"
   type = string
-  default = "db13_gateway_pubIP"
+  default = "dunab13_gateway_pubIP"
 }
 
 variable pubIP_allocation {  
@@ -89,6 +89,24 @@ variable pub_sbnt_add_pref {
 }
 
 # Variables pour la VM
+
+variable nic_publicIP_name {
+  description = "Nom de l'IP publique du NIC de la VM"
+  type = string
+  default = "dunab13_nic_pubIP"
+}
+
+variable nic_pubIP_allocation {
+  description = "Méthode d'allocation pour l'IP publique du NIC de la VM"
+  type = string
+  default = "Static"
+}
+
+variable sku_nic_pubIP {
+  description = "SKU de l'adresse IP publique du NIC de la VM"
+  type = string
+  default = "Standard"
+}
 
 variable vm_name {
   description = "Nom du cluster AKS"
