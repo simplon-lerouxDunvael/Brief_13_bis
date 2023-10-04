@@ -30,7 +30,6 @@ resource "azurerm_subnet" "subnet1" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.subnet1_prefix
-  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 # BONUS
@@ -105,6 +104,11 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
+# Associate security group with network interface
+resource "azurerm_network_interface_security_group_association" "nsgAssociation" {
+  network_interface_id      = azurerm_network_interface.Nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
 
 # Créez la machine virtuelle Azure
 resource "azurerm_linux_virtual_machine" "VM" {
