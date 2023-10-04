@@ -126,7 +126,7 @@ resource "azurerm_network_interface_security_group_association" "nsgAssociation"
 }
 
 data "template_file" "inventory" {
-  template = file("inventory.tpl")
+  template = file("${path.module}/inventory.tpl")
   vars = {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
 }
 
