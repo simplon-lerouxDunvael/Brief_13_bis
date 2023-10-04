@@ -90,6 +90,66 @@ variable pub_sbnt_add_pref {
 
 # Variables pour la VM
 
+variable nsg_name {
+  description = "Nom du NSG de la VM"
+  type = string
+  default = "dunab13_nsg"
+}
+
+variable nsg-rule_name {
+  description = "Nom de la règle NSG de la VM"
+  type = string
+  default = "nsgRule_allow-ssh"
+}
+
+variable nsgRule_priority {
+  description = "Priority of the NSG rule allow_ssh"
+  type = string
+  default = 1001
+}
+
+variable nsgRule_direction {
+  description = "Direction d'ouverture du port"
+  type = string
+  default = "Inbound"
+}
+
+variable nsgRule_access {
+  description = "Autorisation pour la direction d'ouverture du port"
+  type = string
+  default = "Allow"
+}
+
+variable nsgRule_protocol {
+  description = "Type de protocole pour la règle allow_ssh"
+  type = string
+  default = "Tcp"
+}
+
+variable nsgRule_source_port_range {
+  description = "Port ou plage de ports autorisés ou refusés pour le trafic entrant ou sortant"
+  type = string
+  default = "*"
+}
+
+variable nsgRule_destination_port_range {
+  description = "Port de destination à ouvrir"
+  type = string
+  default = "22"
+}
+
+variable nsgRule_source_address_prefix {
+  description = "Plage d'adresses IP autorisées à initier le trafic"
+  type = string
+  default = "*"
+}
+
+variable nsgRule_destination_address_prefix {
+  description = "Plage d'adresses IP à laquelle le trafic est destiné"
+  type = string
+  default = "*"
+}
+
 variable nic_publicIP_name {
   description = "Nom de l'IP publique du NIC de la VM"
   type = string
