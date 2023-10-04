@@ -124,6 +124,6 @@ resource "azurerm_network_interface" "Nic" {
     name                          = var.nicIP_conf
     subnet_id                     = azurerm_subnet.subnet1.id
     private_ip_address_allocation = var.nic_allocation
-    public_ip_address_id           = azurerm_public_ip.nic_public_ip.id
+    public_ip_address_id          = azurerm_public_ip.nic_public_ip.id
   }
 }
