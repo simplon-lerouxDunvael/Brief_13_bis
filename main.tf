@@ -67,11 +67,11 @@ resource "azurerm_subnet" "pub_subnet" {
 }
 
 
-# Créez une clé SSH pour la machine virtuelle
+/* # Créez une clé SSH pour la machine virtuelle
 resource "tls_private_key" "sshKey" {
   algorithm = "RSA"
   rsa_bits  = 4096
-}
+} */
 
 # Créer une adresse IP publique pour le NIC de la VM
 resource "azurerm_public_ip" "nic_public_ip" {
@@ -120,7 +120,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
   admin_username      = var.admin_username
   admin_ssh_key {
     username   = var.admin_username
-    public_key = tls_private_key.sshKey.public_key_openssh # file("~/.ssh/id_rsa.pub")
+    public_key = file("~/.ssh/id_rsa.pub") # tls_private_key.sshKey.public_key_openssh
   }
   os_disk {
     name              = "osdisk"
