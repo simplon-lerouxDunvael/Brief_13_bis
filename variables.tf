@@ -165,7 +165,7 @@ variable nsgRule_priority2 {
 variable nsgRule_direction2 {
   description = "Direction d'ouverture du port"
   type = string
-  default = "Outound"
+  default = "Outbound"
 }
 
 variable nsgRule_access2 {
