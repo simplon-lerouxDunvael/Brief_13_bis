@@ -5,7 +5,7 @@
 variable resource_group_name {
   description = "Nom du RG"
   type = string
-  default = "db13-rg"
+  default = "dunab13-rg"
 }
 
 variable location {
@@ -19,7 +19,7 @@ variable location {
 variable vnet_name {
   description = "Nom du Vnet"
   type = string
-  default = "db13-vnet"
+  default = "dunab13-vnet"
 }
 
 variable address_space {
@@ -31,7 +31,7 @@ variable address_space {
 variable subnet1_name {
   description = "Nom du sous-réseau 1"
   type = string
-  default = "db13-sbnt"
+  default = "dunab13-sbnt"
 }
 
 variable subnet1_prefix {  
@@ -43,7 +43,7 @@ variable subnet1_prefix {
 variable gateway_name {  
   description = "Nom de la passerelle"
   type = string
-  default = "db13_gateway"
+  default = "dunab13_gateway"
 }
 
 variable pubIP_gateway_name {  
@@ -67,7 +67,7 @@ variable pubIP_sku {
 variable priv_subnet_name {  
   description = "Nom du sous-réseau privé"
   type = string
-  default = "db13_priv_sbnt"
+  default = "dunab13_priv_sbnt"
 }
 
 variable priv_sbnt_add_pref {  
@@ -79,7 +79,7 @@ variable priv_sbnt_add_pref {
 variable pub_subnet_name {  
   description = "Nom du sous-réseau publique"
   type = string
-  default = "db13_pub_sbnt"
+  default = "dunab13_pub_sbnt"
 }
 
 variable pub_sbnt_add_pref {  
@@ -93,7 +93,7 @@ variable pub_sbnt_add_pref {
 variable vm_name {
   description = "Nom du cluster AKS"
   type = string
-  default = "db13-VM"
+  default = "dunab13-VM"
 }
 
 variable vm_size {
@@ -117,7 +117,7 @@ variable storage_account_type {
 variable nic_name {
   description = "Nom du NIC"
   type = string
-  default = "b13_Nic"
+  default = "dunab13_Nic"
 }
 
 variable nicIP_conf {
