@@ -30,6 +30,10 @@ resource "azurerm_subnet" "subnet1" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.subnet1_prefix
+  
+  network_security_group {
+    id = azurerm_network_security_group.nsg.id
+  }
 }
 
 # BONUS
@@ -73,13 +77,35 @@ resource "tls_private_key" "sshKey" {
   rsa_bits  = 4096
 }
 
-# Créer une adresse IP publqiue pour le NIC de la VM
+# Créer une adresse IP publique pour le NIC de la VM
 resource "azurerm_public_ip" "nic_public_ip" {
   name                = var.nic_publicIP_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   allocation_method   = var.nic_pubIP_allocation # Use "Static" if a static IP is needed
   sku                 = var.sku_nic_pubIP
+}
+
+# Créer un NSG pour ouvrir le port 22 de la VM
+resource "azurerm_network_security_group" "nsg" {
+  name                = var.nsg_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+# Créer les règles du NSG de la VM
+resource "azurerm_network_security_rule" "ssh_rule" {
+  name                        = var.nsg-rule_name
+  priority                    = var.nsgRule_priority
+  direction                   = var.nsgRule_direction
+  access                      = var.nsgRule_access
+  protocol                    = var.nsgRule_protocol
+  source_port_range           = var.nsgRule_source_port_range
+  destination_port_range      = var.nsgRule_destination_port_range
+  source_address_prefix       = var.nsgRule_source_address_prefix
+  destination_address_prefix  = var.nsgRule_destination_address_prefix
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
 
