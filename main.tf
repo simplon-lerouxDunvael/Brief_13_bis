@@ -96,9 +96,9 @@ resource "azurerm_linux_virtual_machine" "VM" {
     sku       = "8-LVM"
     version   = "8.8.2023081717"
   }
-  provisioner "local-exec" {
+  /* provisioner "local-exec" {
   command = "ansible-galaxy install -r requirements.yml"
-  }
+  } */
   provisioner "local-exec" {
   command = "ansible-playbook playbook.yml -i inventory.ini"
   }
