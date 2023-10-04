@@ -147,8 +147,6 @@ resource "azurerm_network_interface" "Nic" {
     subnet_id                     = azurerm_subnet.subnet1.id
     private_ip_address_allocation = var.nic_allocation
     public_ip_address_id          = azurerm_public_ip.nic_public_ip.id
+    network_security_group_id     = azurerm_network_security_group.nsg.id
   }
-
-  # Associate the NIC with the NSG
-  network_security_group_ids = [azurerm_network_security_group.nsg.id]
 }
