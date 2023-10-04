@@ -126,8 +126,8 @@ resource "azurerm_network_interface_security_group_association" "nsgAssociation"
 }
 
 data "template_file" "inventory" {
-  template= file("inventory.tpl")
-  vars= {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
+  template = file("inventory.tpl")
+  vars = {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
 }
 
 resource "local_file" "inventory_rendered" {
@@ -138,6 +138,7 @@ resource "local_file" "inventory_rendered" {
 # Créez la machine virtuelle Azure
 resource "azurerm_linux_virtual_machine" "VM" {
   name                = var.vm_name
+  depends_on = [local_file.inventory_rendered]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.Nic.id]
