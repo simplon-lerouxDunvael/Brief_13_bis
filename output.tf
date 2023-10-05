@@ -1,15 +1,15 @@
-output "resource_group_name" {
-  value = azurerm_resource_group.rg.name
+output "resource_group" {
+  value = azurerm_resource_group.rg
 }
 
-output "subnet_id" {
-  value = azurerm_subnet.subnet1.id
+output "subnet" {
+  value = azurerm_subnet.subnet1
 }
 
-output "priv_subnet_id" {
-  value = azurerm_subnet.priv_subnet.id
+output "priv_subnet" {
+  value = azurerm_subnet.priv_subnet
 }
 
-output "pub_subnet_id" {
-  value = azurerm_subnet.pub_subnet.id
+output "nsg" {
+  value = azurerm_subnet.nsg
 }
