@@ -1,4 +1,4 @@
-# Module de déploiement d'un RG, réseau et sous-réseau et d'un cluster AKS => https://github.com/edalferes/terraform-azure-aks/blob/master/variables.tf
+# MODULE DE DEPLOIEMENT
 
 terraform {
  required_providers {
@@ -32,8 +32,6 @@ resource "azurerm_subnet" "subnet1" {
   address_prefixes     = var.subnet1_prefix
 }
 
-# BONUS
-
 # Créer une NAT Gateway
 resource "azurerm_nat_gateway" "gateway" {
   name                    = var.gateway_name
@@ -48,38 +46,6 @@ resource "azurerm_public_ip" "pubIP_gateway" {
   location            = azurerm_resource_group.rg.location
   allocation_method   = var.pubIP_allocation
   sku                 = var.pubIP_sku
-}
-
-# Créer un sous-réseau privé
-resource "azurerm_subnet" "priv_subnet" {
-  name                 = var.priv_subnet_name
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.priv_sbnt_add_pref
-}
-
-# Créer un sous-réseau public
-resource "azurerm_subnet" "pub_subnet" {
-  name                 = var.pub_subnet_name
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.pub_sbnt_add_pref
-}
-
-
-/* # Créez une clé SSH pour la machine virtuelle
-resource "tls_private_key" "sshKey" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-} */
-
-# Créer une adresse IP publique pour le NIC de la VM
-resource "azurerm_public_ip" "nic_public_ip" {
-  name                = var.nic_publicIP_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  allocation_method   = var.nic_pubIP_allocation # Use "Static" if a static IP is needed
-  sku                 = var.sku_nic_pubIP
 }
 
 # Créer un NSG pour ouvrir le port 22 de la VM
@@ -119,23 +85,38 @@ resource "azurerm_network_security_rule" "ssh_rule2" {
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
-# Associate security group with network interface
+# RESOURCES DEPLOYED DIRECTLY IN THE MAIN.TF FILE
+
+/* # Créer une adresse IP publique pour le NIC de la VM
+resource "azurerm_public_ip" "nic_public_ip" {
+  name                = var.nic_publicIP_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  allocation_method   = var.nic_pubIP_allocation # Use "Static" if a static IP is needed
+  sku                 = var.sku_nic_pubIP
+} */
+
+/* # Créez une interface réseau pour la machine virtuelle
+resource "azurerm_network_interface" "Nic" {
+  name                = var.nic_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = var.nicIP_conf
+    subnet_id                     = azurerm_subnet.subnet1.id
+    private_ip_address_allocation = var.nic_allocation
+    public_ip_address_id          = azurerm_public_ip.nic_public_ip.id
+  }
+} */
+
+/* # Associate security group with network interface
 resource "azurerm_network_interface_security_group_association" "nsgAssociation" {
   network_interface_id      = azurerm_network_interface.Nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
-}
-
-/* data "template_file" "inventory" {
-  template = file("${path.module}/inventory.tpl")
-  vars = {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
-}
-
-resource "local_file" "inventory_rendered" {
-  content = data.template_file.inventory.rendered
-  filename = "${path.module}/inventory.ini"
 } */
 
-# Créez la machine virtuelle Azure
+/* # Créez la machine virtuelle Azure
 resource "azurerm_linux_virtual_machine" "VM" {
   name                = var.vm_name
   depends_on = [local_file.inventory_rendered]
@@ -159,24 +140,45 @@ resource "azurerm_linux_virtual_machine" "VM" {
     sku       = "8-LVM"
     version   = "8.8.2023081717"
   }
-  /* provisioner "local-exec" {
+  provisioner "local-exec" {
   command = "ansible-galaxy install -r requirements.yml"
-  } */
+  }
   provisioner "local-exec" {
   command = "ansible-playbook playbook.yml -i inventory.ini"
   }
+} */
+
+
+# RESOURCES NOT USED
+
+/* # Créer un sous-réseau privé
+resource "azurerm_subnet" "priv_subnet" {
+  name                 = var.priv_subnet_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.priv_sbnt_add_pref
 }
 
-# Créez une interface réseau pour la machine virtuelle
-resource "azurerm_network_interface" "Nic" {
-  name                = var.nic_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+# Créer un sous-réseau public
+resource "azurerm_subnet" "pub_subnet" {
+  name                 = var.pub_subnet_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.pub_sbnt_add_pref
+} */
 
-  ip_configuration {
-    name                          = var.nicIP_conf
-    subnet_id                     = azurerm_subnet.subnet1.id
-    private_ip_address_allocation = var.nic_allocation
-    public_ip_address_id          = azurerm_public_ip.nic_public_ip.id
-  }
+/* # Créez une clé SSH pour la machine virtuelle
+resource "tls_private_key" "sshKey" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+} */
+
+/* data "template_file" "inventory" {
+  template = file("${path.module}/inventory.tpl")
+  vars = {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
 }
+
+resource "local_file" "inventory_rendered" {
+  content = data.template_file.inventory.rendered
+  filename = "${path.module}/inventory.ini"
+} */
