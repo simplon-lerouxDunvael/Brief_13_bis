@@ -17,5 +17,5 @@ output "priv_subnet" {
 }
 
 output "nsg" {
-  value = azurerm_subnet.nsg
+  value = azurerm_network_security_group.nsg
 }
