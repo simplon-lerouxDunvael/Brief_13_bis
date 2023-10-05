@@ -1,4 +1,4 @@
-# Variables pour le déploiement du module
+# Définition des Variables pour le déploiement du module
 
 # Variable localisation et RG
 
