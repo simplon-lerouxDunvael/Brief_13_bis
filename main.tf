@@ -32,6 +32,14 @@ resource "azurerm_subnet" "subnet1" {
   address_prefixes     = var.subnet1_prefix
 }
 
+# Créer un sous-réseau privé
+resource "azurerm_subnet" "priv_subnet" {
+  name                 = var.priv_subnet_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.priv_sbnt_add_pref
+}
+
 # Créer une NAT Gateway
 resource "azurerm_nat_gateway" "gateway" {
   name                    = var.gateway_name
@@ -151,15 +159,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
 
 # RESOURCES NOT USED
 
-/* # Créer un sous-réseau privé
-resource "azurerm_subnet" "priv_subnet" {
-  name                 = var.priv_subnet_name
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.priv_sbnt_add_pref
-}
-
-# Créer un sous-réseau public
+/* # Créer un sous-réseau public
 resource "azurerm_subnet" "pub_subnet" {
   name                 = var.pub_subnet_name
   resource_group_name  = azurerm_resource_group.rg.name
