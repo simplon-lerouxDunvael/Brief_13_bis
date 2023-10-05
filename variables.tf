@@ -1,4 +1,4 @@
-# Variables pour le déploiement du module avec les ressources et le cluster AKS
+# Variables pour le déploiement du module
 
 # Variable localisation et RG
 
