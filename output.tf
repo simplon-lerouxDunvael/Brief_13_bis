@@ -1,3 +1,5 @@
+# Necessayr outputs for the module and the deployment of the main.tf
+
 output "resource_group" {
   value = azurerm_resource_group.rg
 }
