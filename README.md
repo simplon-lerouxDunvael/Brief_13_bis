@@ -6,8 +6,7 @@ Repo github contenant le module Terraform avec les ressources suivantes :
 
 Groupe de ressources
 Réseau virtuel
-Sous-réseaux : publique (x2) et privé
-Passerelle NAT + table de routage
+Sous-réseaux
 VM Linux
 => variables.tf : description des variables et de leur type + valeurs par défaut
 
