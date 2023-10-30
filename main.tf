@@ -37,30 +37,6 @@ resource "azurerm_subnet" "subnet1" {
   address_prefixes     = var.subnet1_prefix
 }
 
-# Créer un sous-réseau privé
-resource "azurerm_subnet" "priv_subnet" {
-  name                 = var.priv_subnet_name
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.priv_sbnt_add_pref
-}
-
-# Créer une NAT Gateway
-resource "azurerm_nat_gateway" "gateway" {
-  name                    = var.gateway_name
-  resource_group_name     = azurerm_resource_group.rg.name
-  location                = azurerm_resource_group.rg.location
-}
-
-# Créer une IP publique pour la NAT Gateway
-resource "azurerm_public_ip" "pubIP_gateway" {
-  name                = var.pubIP_gateway_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  allocation_method   = var.pubIP_allocation
-  sku                 = var.pubIP_sku
-}
-
 # Créer un NSG pour ouvrir le port 22 de la VM
 resource "azurerm_network_security_group" "nsg" {
   name                = var.nsg_name
@@ -170,15 +146,15 @@ resource "azurerm_subnet" "pub_subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.pub_sbnt_add_pref
-} */
+}
 
-/* # Créez une clé SSH pour la machine virtuelle
+# Créez une clé SSH pour la machine virtuelle
 resource "tls_private_key" "sshKey" {
   algorithm = "RSA"
   rsa_bits  = 4096
-} */
+}
 
-/* data "template_file" "inventory" {
+data "template_file" "inventory" {
   template = file("${path.module}/inventory.tpl")
   vars = {nic_public_ip=azurerm_public_ip.nic_public_ip.ip_address}
 }
@@ -186,4 +162,28 @@ resource "tls_private_key" "sshKey" {
 resource "local_file" "inventory_rendered" {
   content = data.template_file.inventory.rendered
   filename = "${path.module}/inventory.ini"
+}
+
+# Créer un sous-réseau privé
+resource "azurerm_subnet" "priv_subnet" {
+  name                 = var.priv_subnet_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.priv_sbnt_add_pref
+}
+
+# Créer une NAT Gateway
+resource "azurerm_nat_gateway" "gateway" {
+  name                    = var.gateway_name
+  resource_group_name     = azurerm_resource_group.rg.name
+  location                = azurerm_resource_group.rg.location
+}
+
+# Créer une IP publique pour la NAT Gateway
+resource "azurerm_public_ip" "pubIP_gateway" {
+  name                = var.pubIP_gateway_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  allocation_method   = var.pubIP_allocation
+  sku                 = var.pubIP_sku
 } */
