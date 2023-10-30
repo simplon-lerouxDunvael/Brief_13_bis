@@ -12,9 +12,9 @@ output "subnet" {
   value = azurerm_subnet.subnet1
 }
 
-output "priv_subnet" {
+/* output "priv_subnet" {
   value = azurerm_subnet.priv_subnet
-}
+} */
 
 output "nsg" {
   value = azurerm_network_security_group.nsg
