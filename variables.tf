@@ -5,7 +5,7 @@
 variable resource_group_name {
   description = "Nom du RG"
   type = string
-  default = "dunab13-rg"
+  default = "dunb13-rg"
 }
 
 variable location {
@@ -19,7 +19,7 @@ variable location {
 variable vnet_name {
   description = "Nom du Vnet"
   type = string
-  default = "dunab13-vnet"
+  default = "dunb13-vnet"
 }
 
 variable address_space {
@@ -31,7 +31,7 @@ variable address_space {
 variable subnet1_name {
   description = "Nom du sous-réseau 1"
   type = string
-  default = "dunab13-sbnt"
+  default = "dunb13-sbnt"
 }
 
 variable subnet1_prefix {  
@@ -43,13 +43,13 @@ variable subnet1_prefix {
 /* variable gateway_name {  
   description = "Nom de la passerelle"
   type = string
-  default = "dunab13_gateway"
+  default = "dunb13_gateway"
 }
 
 variable pubIP_gateway_name {  
   description = "Nom de l'IP publique de la gateway"
   type = string
-  default = "dunab13_gateway_pubIP"
+  default = "dunb13_gateway_pubIP"
 }
 
 variable pubIP_allocation {  
@@ -67,7 +67,7 @@ variable pubIP_sku {
 variable priv_subnet_name {  
   description = "Nom du sous-réseau privé"
   type = string
-  default = "dunab13_priv_sbnt"
+  default = "dunb13_priv_sbnt"
 }
 
 variable priv_sbnt_add_pref {  
@@ -79,7 +79,7 @@ variable priv_sbnt_add_pref {
 variable pub_subnet_name {  
   description = "Nom du sous-réseau publique"
   type = string
-  default = "dunab13_pub_sbnt"
+  default = "dunb13_pub_sbnt"
 }
 
 variable pub_sbnt_add_pref {  
@@ -93,7 +93,7 @@ variable pub_sbnt_add_pref {
 variable nsg_name {
   description = "Nom du NSG de la VM"
   type = string
-  default = "dunab13_nsg"
+  default = "dunb13_nsg"
 }
 
 variable nsg-rule_name {
@@ -207,7 +207,7 @@ variable nsgRule_destination_address_prefix2 {
 variable nic_publicIP_name {
   description = "Nom de l'IP publique du NIC de la VM"
   type = string
-  default = "dunab13_nic_pubIP"
+  default = "dunb13_nic_pubIP"
 }
 
 variable nic_pubIP_allocation {
@@ -225,7 +225,7 @@ variable sku_nic_pubIP {
 variable vm_name {
   description = "Nom du cluster AKS"
   type = string
-  default = "dunab13-VM"
+  default = "dunb13-VM"
 }
 
 variable vm_size {
@@ -237,7 +237,7 @@ variable vm_size {
 variable admin_username {
   description = "Nom de l'administrateur de la VM"
   type = string
-  default = "DunaAdmin"
+  default = "DunAdmin"
 }
 
 variable storage_account_type {
@@ -249,7 +249,7 @@ variable storage_account_type {
 variable nic_name {
   description = "Nom du NIC"
   type = string
-  default = "dunab13_Nic"
+  default = "dunb13_Nic"
 }
 
 variable nicIP_conf {
