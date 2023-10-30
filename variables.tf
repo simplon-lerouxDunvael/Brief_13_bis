@@ -40,7 +40,7 @@ variable subnet1_prefix {
   default = ["10.6.1.0/24"]
 }
 
-variable gateway_name {  
+/* variable gateway_name {  
   description = "Nom de la passerelle"
   type = string
   default = "dunab13_gateway"
@@ -74,7 +74,7 @@ variable priv_sbnt_add_pref {
   description = "Plage d'adresses IP pour le sous-réseau privé"
   type = list(string)
   default = ["10.6.2.0/24"]
-}
+} */
 
 variable pub_subnet_name {  
   description = "Nom du sous-réseau publique"
